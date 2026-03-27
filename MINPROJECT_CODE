@@ -1,0 +1,117 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("food_delivery_time_estimation.csv")
+sns.set(style="whitegrid")
+plt.figure()
+sns.barplot(x="weather", y="delivery_time", data=df)
+plt.title("Average Delivery Time by Weather")
+plt.show()
+plt.figure()
+sns.barplot(x="weather", y="rider_speed", data=df)
+plt.title("Average Rider Speed by Weather")
+plt.show()
+plt.figure(figsize=(6,4))
+
+df['weather'].value_counts().plot(kind='bar')
+
+plt.title("Order Count by Weather")
+plt.xlabel("Weather")
+plt.ylabel("Number of Orders")
+
+plt.show()
+plt.figure()
+sns.countplot(x="weather", data=df)
+plt.title("Order Count by Weather")
+plt.show()
+plt.figure()
+sns.scatterplot(x="distance_km", y="delivery_time", data=df)
+plt.title("Distance vs Delivery Time")
+plt.show()
+plt.figure()
+sns.scatterplot(x="rider_speed", y="delivery_time", data=df)
+plt.title("Rider Speed vs Delivery Time")
+plt.show()
+plt.figure()
+sns.histplot(df["delivery_time"], bins=20)
+plt.title("Delivery Time Distribution")
+plt.show()
+plt.figure()
+sns.histplot(df["rider_speed"], bins=20)
+plt.title("Rider Speed Distribution")
+plt.show()
+plt.figure()
+sns.histplot(df["distance_km"], bins=20)
+plt.title("Distance Distribution")
+plt.show()
+df["distance_range"] = pd.cut(df["distance_km"], bins=5)
+
+plt.figure()
+sns.barplot(x="distance_range", y="delivery_time", data=df)
+plt.xticks(rotation=45)
+plt.title("Average Delivery Time by Distance Range")
+plt.show()
+plt.figure()
+sns.heatmap(df[["distance_km","rider_speed","delivery_time"]].corr(), annot=True)
+plt.title("Correlation Heatmap")
+plt.show()
+plt.figure()
+sns.scatterplot(x="distance_km", y="delivery_time", hue="weather", data=df)
+plt.title("Distance vs Delivery Time by Weather")
+plt.show()
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("/content/food_delivery_time_estimation.csv")
+sns.set(style="whitegrid")
+snowy_df = df[df["weather"] == "Snowy"]
+
+plt.figure(figsize=(6,4))
+sns.scatterplot(x="distance_km", y="delivery_time", data=snowy_df)
+
+plt.title("Distance vs Delivery Time - Snowy Weather")
+plt.xlabel("Distance (km)")
+plt.ylabel("Delivery Time")
+plt.show()
+clear_df = df[df["weather"] == "Clear"]
+
+plt.figure(figsize=(6,4))
+sns.scatterplot(x="distance_km", y="delivery_time", data=clear_df)
+sns.scatterplot(x="distance_km", y="delivery_time", data=df, color="red")
+
+plt.title("Distance vs Delivery Time - Clear Weather")
+plt.xlabel("Distance (km)")
+plt.ylabel("Delivery Time")
+plt.show()
+rainy_df = df[df["weather"] == "Rainy"]
+
+plt.figure(figsize=(6,4))
+sns.scatterplot(x="distance_km", y="delivery_time", data=rainy_df)
+sns.scatterplot(x="distance_km", y="delivery_time", data=df, color="purple")
+
+plt.title("Distance vs Delivery Time - Rainy Weather")
+plt.xlabel("Distance (km)")
+plt.ylabel("Delivery Time")
+plt.show()
+windy_df = df[df["weather"] == "Windy"]
+
+plt.figure(figsize=(6,4))
+sns.scatterplot(x="distance_km", y="delivery_time", data=windy_df)
+sns.scatterplot(x="distance_km", y="delivery_time", data=df, color="green")
+
+plt.title("Distance vs Delivery Time - Windy Weather")
+plt.xlabel("Distance (km)")
+plt.ylabel("Delivery Time")
+plt.show()
+stormy_df = df[df["weather"] == "Stormy"]
+
+plt.figure(figsize=(6,4))
+sns.scatterplot(x="distance_km", y="delivery_time", data=stormy_df)
+sns.scatterplot(x="distance_km", y="delivery_time", data=df, color="orange")
+
+plt.title("Distance vs Delivery Time - Stormy Weather")
+plt.xlabel("Distance (km)")
+plt.ylabel("Delivery Time")
+plt.show()
